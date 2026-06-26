@@ -2,7 +2,7 @@
 
 > A unified platform that guides candidates through structured placement preparation — learning roadmaps, interview practice, and application execution — using schema-constrained LLM generation and async queue orchestration.
 
-**Live Demo:** https://prepsphere000146.vercel.app &nbsp;|&nbsp; **GitHub:** github.com/yamireddy04/PrepSphere
+**Live Demo:** https://prepsphere000146.vercel.app &nbsp;|&nbsp; **GitHub:** https://github.com/yamini-nlp/PrepSphere
 
 ![Stack](https://img.shields.io/badge/Stack-Node.js%20%7C%20Express%20%7C%20BullMQ%20%7C%20MongoDB-blue?style=flat-square)
 ![LLM](https://img.shields.io/badge/LLM-Llama%203%2070B%20%7C%20Groq-orange?style=flat-square)
@@ -217,18 +217,46 @@ Visit `http://localhost:5000`
 ```
 PrepSphere/
 ├── backend/
-│   ├── server.js               # Express API server
+│   ├── server.js                   # Express API server
+│   ├── passport.js                 # Auth strategy config
 │   ├── workers/
-│   │   └── aiWorker.js         # BullMQ worker — consumes all four queues
-│   ├── queues/                 # BullMQ queue definitions
-│   ├── routes/                 # API route handlers
-│   └── models/                 # MongoDB schemas
+│   │   └── aiWorker.js             # BullMQ worker — consumes all four queues
+│   ├── queues/
+│   │   ├── index.js                # BullMQ queue definitions
+│   │   └── redisConnection.js
+│   ├── routes/
+│   │   ├── auth.js
+│   │   └── jobs.js
+│   ├── middleware/
+│   │   ├── authMiddleware.js
+│   │   └── rateLimiter.js
+│   ├── models/
+│   │   ├── User.js
+│   │   └── Job.js
+│   └── aiService.js
 ├── Frontend/
 │   ├── index.html
-│   └── js/
+│   ├── login.html
+│   ├── register.html
+│   ├── js/config.js
+│   ├── api/groq.js
+│   ├── css/style.css
+│   ├── shared/                     # mobile.css, styles.css
+│   ├── images/                     # 40+ UI assets
+│   └── [feature pages]/            # Jam, MockIt, Phase1–3, aptitude,
+│                                    # coverletter, dashboard, exp, gd,
+│                                    # hirehub, hr, intervyu, mcqs, mmi,
+│                                    # prepmaster, quiz, resume, roadmap,
+│                                    # technical, tq — each its own
+│                                    # folder + .html page
+├── LICENSE
 └── README.md
 ```
 
 ---
 
+<div align="center">
+
 *Built by Yamini G &nbsp;·&nbsp; [GitHub](https://github.com/yamireddy04/PrepSphere) &nbsp;·&nbsp; [Live Demo](https://prepsphere000146.vercel.app)*
+
+</div>
