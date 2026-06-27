@@ -1,5 +1,5 @@
-import { ZodError } from "zod";
-import { RoadmapSchema, QuizSchema, InterviewSchema, BuzzwordsSchema } from "./schemas.js";
+const { ZodError } = require("zod");
+const { RoadmapSchema, QuizSchema, InterviewSchema, BuzzwordsSchema } = require("./schemas.js");
 
 const SCHEMAS = {
   roadmap:    RoadmapSchema,
@@ -8,7 +8,7 @@ const SCHEMAS = {
   buzzwords:  BuzzwordsSchema,
 };
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
