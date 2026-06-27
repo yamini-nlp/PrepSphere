@@ -2,7 +2,7 @@ require("dotenv").config({ path: require("path").resolve(__dirname, "../.env") }
 
 const fs = require("fs");
 const path = require("path");
-const { ZodError } = require("zod");
+const { ZodError } = require("zod/v4");
 
 const { generateRoadmap, generateQuiz, generateMockInterview, extractBuzzwords } = require("../aiService");
 const { RoadmapSchema, QuizSchema, InterviewSchema, BuzzwordsSchema } = require("../schemas");

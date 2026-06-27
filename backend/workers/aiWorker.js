@@ -2,7 +2,7 @@ require("dotenv").config({ path: require("path").resolve(__dirname, "../.env") }
 
 const { Worker } = require("bullmq");
 const mongoose   = require("mongoose");
-const { ZodError } = require("zod");
+const { ZodError } = require("zod/v4");
 const { createRedisConnection } = require("../queues/redisConnection");
 const {
     extractBuzzwords,
