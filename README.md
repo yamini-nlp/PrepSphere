@@ -170,7 +170,7 @@ Every LLM call includes explicit JSON shape definitions and representative examp
 
 **1. Clone**
 ```bash
-git clone https://github.com/yamireddy04/PrepSphere.git
+git clone https://github.com/yamini-nlp/PrepSphere.git
 cd PrepSphere
 ```
 
