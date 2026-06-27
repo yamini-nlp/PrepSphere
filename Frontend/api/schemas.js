@@ -1,6 +1,6 @@
-import { z } from "zod";
+const { z } = require("zod");
 
-export const RoadmapSchema = z.object({
+const RoadmapSchema = z.object({
   role: z.string(),
   roadmapSteps: z.array(
     z.object({
@@ -26,7 +26,7 @@ export const RoadmapSchema = z.object({
   ),
 });
 
-export const QuizSchema = z.array(
+const QuizSchema = z.array(
   z.object({
     question: z.string(),
     options: z.array(z.string()).length(4),
@@ -34,7 +34,7 @@ export const QuizSchema = z.array(
   })
 );
 
-export const InterviewSchema = z.object({
+const InterviewSchema = z.object({
   topics: z.array(z.string()),
   interviews: z.array(
     z.object({
@@ -44,4 +44,9 @@ export const InterviewSchema = z.object({
   ),
 });
 
-export const BuzzwordsSchema = z.array(z.string().min(1));
+const BuzzwordsSchema = z.array(z.string().min(1)).refine(
+  (arr) => arr.length > 0 && !arr.some((w) => w.includes("AI is busy")),
+  { message: "Buzzword extraction failed or AI was busy" }
+);
+
+module.exports = { RoadmapSchema, QuizSchema, InterviewSchema, BuzzwordsSchema };
