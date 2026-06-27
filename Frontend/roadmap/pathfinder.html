@@ -42,7 +42,7 @@
     </section>
     <div id="loading" class="hidden text-center py-20">
       <div class="loader inline-block mb-3"></div>
-      <p class="text-slate-600 font-medium">Architecting your lore...</p>
+      <p id="loadingText" class="text-slate-600 font-medium">Architecting your lore...</p>
     </div>
     <main id="roadmapContainer" class="hidden space-y-12"></main>
   </div>
@@ -53,19 +53,58 @@
       <button onclick="window.location.href='../resume/resume.html'" class="nav-btn bg-blue-600 border-blue-500 hover:bg-blue-500">Next →</button>
     </div>
   </nav>
-  <script>
-    async function callGroq(messages) {
-      const res = await fetch('/api/groq', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ model: 'llama-3.3-70b-versatile', temperature: 0.6, response_format: { type: 'json_object' }, messages })
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'API error');
-      return data.choices[0].message.content;
+  <script type="module">
+    import { API_BASE_URL } from '../js/config.js';
+
+    const POLL_INTERVAL_MS = 2000;
+
+    function setLoadingText(text) {
+      document.getElementById('loadingText').textContent = text;
     }
 
-    async function generatePath() {
+    function showError(message) {
+      alert('Failed to generate roadmap: ' + message);
+    }
+
+    function pollJob(jobId, genBtn, loader) {
+      const interval = setInterval(async () => {
+        try {
+          const res = await fetch(`${API_BASE_URL}/api/jobs/${jobId}`);
+          const job = await res.json();
+
+          if (!res.ok) {
+            clearInterval(interval);
+            genBtn.disabled = false;
+            loader.classList.add('hidden');
+            showError(job.error || 'Failed to fetch job status');
+            return;
+          }
+
+          if (job.status === 'queued') {
+            setLoadingText('Queued — waiting for a worker...');
+          } else if (job.status === 'processing') {
+            setLoadingText('Processing — architecting your lore...');
+          } else if (job.status === 'completed') {
+            clearInterval(interval);
+            genBtn.disabled = false;
+            loader.classList.add('hidden');
+            renderRoadmapHTML(job.result);
+          } else if (job.status === 'failed') {
+            clearInterval(interval);
+            genBtn.disabled = false;
+            loader.classList.add('hidden');
+            showError(job.error || 'Job failed');
+          }
+        } catch (err) {
+          clearInterval(interval);
+          genBtn.disabled = false;
+          loader.classList.add('hidden');
+          showError(err.message);
+        }
+      }, POLL_INTERVAL_MS);
+    }
+
+    window.generatePath = async function () {
       const role = document.getElementById('roleInput').value.trim();
       if (!role) return;
       const genBtn = document.getElementById('genBtn');
@@ -75,21 +114,29 @@
       loader.classList.remove('hidden');
       container.classList.add('hidden');
       container.innerHTML = '';
+      setLoadingText('Submitting your request...');
+
       try {
-        const text = await callGroq([
-          { role: 'system', content: `You are a Career Architect specializing in both technology roles and non technology roles. Create a hyper-detailed, structured, ordered learning roadmap for the specified job role. The roadmap must expand on every tool/language/concept. Structure the response as a valid JSON object ONLY, with this exact shape:\n{\n  "role": "Role Name",\n  "roadmapSteps": [\n    {\n      "title": "Module Title",\n      "subtitle": "Brief (5-10 word) description of purpose",\n      "topics": ["topic1", "topic2"],\n      "resources": [{"type": "Free/Paid", "name": "Resource Name", "context": "Where/how to use it"}],\n      "practice": ["Practice task 1", "Practice task 2"]\n    }\n  ],\n  "projectIdeas": [\n    {"title": "Project Name", "description": "What it solves", "stack": ["tech1", "tech2"]}\n  ]\n}` },
-          { role: 'user', content: role }
-        ]);
-        const data = JSON.parse(text);
-        renderRoadmapHTML(data);
-      } catch (error) {
-        console.error('Pathfinder Error:', error);
-        alert('Failed to generate roadmap: ' + error.message);
-      } finally {
+        const res = await fetch(`${API_BASE_URL}/api/roadmap`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ role })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          genBtn.disabled = false;
+          loader.classList.add('hidden');
+          showError(data.error || 'Failed to queue roadmap job');
+          return;
+        }
+        setLoadingText('Queued — waiting for a worker...');
+        pollJob(data.jobId, genBtn, loader);
+      } catch (err) {
         genBtn.disabled = false;
         loader.classList.add('hidden');
+        showError(err.message);
       }
-    }
+    };
 
     function renderRoadmapHTML(data) {
       const container = document.getElementById('roadmapContainer');

@@ -1,0 +1,850 @@
+{
+  "roadmap": [
+    {
+      "run": 1,
+      "input": "Machine Learning Engineer",
+      "pass": true,
+      "durationMs": 2517,
+      "error": null
+    },
+    {
+      "run": 2,
+      "input": "DevOps Engineer",
+      "pass": true,
+      "durationMs": 2673,
+      "error": null
+    },
+    {
+      "run": 3,
+      "input": "Product Manager",
+      "pass": true,
+      "durationMs": 2770,
+      "error": null
+    },
+    {
+      "run": 4,
+      "input": "iOS Developer",
+      "pass": true,
+      "durationMs": 2444,
+      "error": null
+    },
+    {
+      "run": 5,
+      "input": "Cybersecurity Analyst",
+      "pass": true,
+      "durationMs": 3129,
+      "error": null
+    },
+    {
+      "run": 6,
+      "input": "Machine Learning Engineer",
+      "pass": true,
+      "durationMs": 2515,
+      "error": null
+    },
+    {
+      "run": 7,
+      "input": "DevOps Engineer",
+      "pass": true,
+      "durationMs": 2283,
+      "error": null
+    },
+    {
+      "run": 8,
+      "input": "Product Manager",
+      "pass": true,
+      "durationMs": 2428,
+      "error": null
+    },
+    {
+      "run": 9,
+      "input": "iOS Developer",
+      "pass": true,
+      "durationMs": 2351,
+      "error": null
+    },
+    {
+      "run": 10,
+      "input": "Cybersecurity Analyst",
+      "pass": true,
+      "durationMs": 2462,
+      "error": null
+    },
+    {
+      "run": 11,
+      "input": "Machine Learning Engineer",
+      "pass": true,
+      "durationMs": 2100,
+      "error": null
+    },
+    {
+      "run": 12,
+      "input": "DevOps Engineer",
+      "pass": true,
+      "durationMs": 2711,
+      "error": null
+    },
+    {
+      "run": 13,
+      "input": "Product Manager",
+      "pass": true,
+      "durationMs": 4104,
+      "error": null
+    },
+    {
+      "run": 14,
+      "input": "iOS Developer",
+      "pass": true,
+      "durationMs": 5506,
+      "error": null
+    },
+    {
+      "run": 15,
+      "input": "Cybersecurity Analyst",
+      "pass": true,
+      "durationMs": 6364,
+      "error": null
+    },
+    {
+      "run": 16,
+      "input": "Machine Learning Engineer",
+      "pass": true,
+      "durationMs": 6267,
+      "error": null
+    },
+    {
+      "run": 17,
+      "input": "DevOps Engineer",
+      "pass": true,
+      "durationMs": 7615,
+      "error": null
+    },
+    {
+      "run": 18,
+      "input": "Product Manager",
+      "pass": true,
+      "durationMs": 7314,
+      "error": null
+    },
+    {
+      "run": 19,
+      "input": "iOS Developer",
+      "pass": true,
+      "durationMs": 6451,
+      "error": null
+    },
+    {
+      "run": 20,
+      "input": "Cybersecurity Analyst",
+      "pass": true,
+      "durationMs": 5835,
+      "error": null
+    },
+    {
+      "run": 21,
+      "input": "Machine Learning Engineer",
+      "pass": true,
+      "durationMs": 7273,
+      "error": null
+    },
+    {
+      "run": 22,
+      "input": "DevOps Engineer",
+      "pass": true,
+      "durationMs": 6860,
+      "error": null
+    },
+    {
+      "run": 23,
+      "input": "Product Manager",
+      "pass": true,
+      "durationMs": 7215,
+      "error": null
+    },
+    {
+      "run": 24,
+      "input": "iOS Developer",
+      "pass": true,
+      "durationMs": 5174,
+      "error": null
+    },
+    {
+      "run": 25,
+      "input": "Cybersecurity Analyst",
+      "pass": true,
+      "durationMs": 6656,
+      "error": null
+    },
+    {
+      "run": 26,
+      "input": "Machine Learning Engineer",
+      "pass": true,
+      "durationMs": 6228,
+      "error": null
+    },
+    {
+      "run": 27,
+      "input": "DevOps Engineer",
+      "pass": true,
+      "durationMs": 6672,
+      "error": null
+    },
+    {
+      "run": 28,
+      "input": "Product Manager",
+      "pass": true,
+      "durationMs": 7168,
+      "error": null
+    },
+    {
+      "run": 29,
+      "input": "iOS Developer",
+      "pass": true,
+      "durationMs": 5153,
+      "error": null
+    },
+    {
+      "run": 30,
+      "input": "Cybersecurity Analyst",
+      "pass": true,
+      "durationMs": 6521,
+      "error": null
+    }
+  ],
+  "buzzwords": [
+    {
+      "run": 1,
+      "input": "We are looking for a Senior Backend Engineer to join our pla...",
+      "pass": true,
+      "durationMs": 3376,
+      "error": null
+    },
+    {
+      "run": 2,
+      "input": "Seeking a Data Scientist with expertise in Python, Pandas, S...",
+      "pass": true,
+      "durationMs": 308,
+      "error": null
+    },
+    {
+      "run": 3,
+      "input": "We need a Full Stack Developer proficient in React, TypeScri...",
+      "pass": true,
+      "durationMs": 1289,
+      "error": null
+    },
+    {
+      "run": 4,
+      "input": "Our team is hiring a Mobile Developer specialising in Flutte...",
+      "pass": true,
+      "durationMs": 348,
+      "error": null
+    },
+    {
+      "run": 5,
+      "input": "We are hiring a Cloud Infrastructure Engineer with deep expe...",
+      "pass": true,
+      "durationMs": 1257,
+      "error": null
+    },
+    {
+      "run": 6,
+      "input": "We are looking for a Senior Backend Engineer to join our pla...",
+      "pass": true,
+      "durationMs": 278,
+      "error": null
+    },
+    {
+      "run": 7,
+      "input": "Seeking a Data Scientist with expertise in Python, Pandas, S...",
+      "pass": true,
+      "durationMs": 1257,
+      "error": null
+    },
+    {
+      "run": 8,
+      "input": "We need a Full Stack Developer proficient in React, TypeScri...",
+      "pass": true,
+      "durationMs": 1295,
+      "error": null
+    },
+    {
+      "run": 9,
+      "input": "Our team is hiring a Mobile Developer specialising in Flutte...",
+      "pass": true,
+      "durationMs": 317,
+      "error": null
+    },
+    {
+      "run": 10,
+      "input": "We are hiring a Cloud Infrastructure Engineer with deep expe...",
+      "pass": true,
+      "durationMs": 1431,
+      "error": null
+    },
+    {
+      "run": 11,
+      "input": "We are looking for a Senior Backend Engineer to join our pla...",
+      "pass": true,
+      "durationMs": 184,
+      "error": null
+    },
+    {
+      "run": 12,
+      "input": "Seeking a Data Scientist with expertise in Python, Pandas, S...",
+      "pass": true,
+      "durationMs": 1259,
+      "error": null
+    },
+    {
+      "run": 13,
+      "input": "We need a Full Stack Developer proficient in React, TypeScri...",
+      "pass": true,
+      "durationMs": 1426,
+      "error": null
+    },
+    {
+      "run": 14,
+      "input": "Our team is hiring a Mobile Developer specialising in Flutte...",
+      "pass": true,
+      "durationMs": 184,
+      "error": null
+    },
+    {
+      "run": 15,
+      "input": "We are hiring a Cloud Infrastructure Engineer with deep expe...",
+      "pass": true,
+      "durationMs": 1453,
+      "error": null
+    },
+    {
+      "run": 16,
+      "input": "We are looking for a Senior Backend Engineer to join our pla...",
+      "pass": true,
+      "durationMs": 194,
+      "error": null
+    },
+    {
+      "run": 17,
+      "input": "Seeking a Data Scientist with expertise in Python, Pandas, S...",
+      "pass": true,
+      "durationMs": 1444,
+      "error": null
+    },
+    {
+      "run": 18,
+      "input": "We need a Full Stack Developer proficient in React, TypeScri...",
+      "pass": true,
+      "durationMs": 201,
+      "error": null
+    },
+    {
+      "run": 19,
+      "input": "Our team is hiring a Mobile Developer specialising in Flutte...",
+      "pass": true,
+      "durationMs": 1229,
+      "error": null
+    },
+    {
+      "run": 20,
+      "input": "We are hiring a Cloud Infrastructure Engineer with deep expe...",
+      "pass": true,
+      "durationMs": 1438,
+      "error": null
+    },
+    {
+      "run": 21,
+      "input": "We are looking for a Senior Backend Engineer to join our pla...",
+      "pass": true,
+      "durationMs": 207,
+      "error": null
+    },
+    {
+      "run": 22,
+      "input": "Seeking a Data Scientist with expertise in Python, Pandas, S...",
+      "pass": true,
+      "durationMs": 1328,
+      "error": null
+    },
+    {
+      "run": 23,
+      "input": "We need a Full Stack Developer proficient in React, TypeScri...",
+      "pass": true,
+      "durationMs": 1334,
+      "error": null
+    },
+    {
+      "run": 24,
+      "input": "Our team is hiring a Mobile Developer specialising in Flutte...",
+      "pass": true,
+      "durationMs": 178,
+      "error": null
+    },
+    {
+      "run": 25,
+      "input": "We are hiring a Cloud Infrastructure Engineer with deep expe...",
+      "pass": true,
+      "durationMs": 1261,
+      "error": null
+    },
+    {
+      "run": 26,
+      "input": "We are looking for a Senior Backend Engineer to join our pla...",
+      "pass": true,
+      "durationMs": 188,
+      "error": null
+    },
+    {
+      "run": 27,
+      "input": "Seeking a Data Scientist with expertise in Python, Pandas, S...",
+      "pass": true,
+      "durationMs": 1443,
+      "error": null
+    },
+    {
+      "run": 28,
+      "input": "We need a Full Stack Developer proficient in React, TypeScri...",
+      "pass": true,
+      "durationMs": 1330,
+      "error": null
+    },
+    {
+      "run": 29,
+      "input": "Our team is hiring a Mobile Developer specialising in Flutte...",
+      "pass": true,
+      "durationMs": 181,
+      "error": null
+    },
+    {
+      "run": 30,
+      "input": "We are hiring a Cloud Infrastructure Engineer with deep expe...",
+      "pass": true,
+      "durationMs": 1308,
+      "error": null
+    }
+  ],
+  "interview": [
+    {
+      "run": 1,
+      "input": "We are looking for a Senior Backend Engineer to join our pla...",
+      "pass": true,
+      "durationMs": 5129,
+      "error": null
+    },
+    {
+      "run": 2,
+      "input": "Seeking a Data Scientist with expertise in Python, Pandas, S...",
+      "pass": true,
+      "durationMs": 6080,
+      "error": null
+    },
+    {
+      "run": 3,
+      "input": "We need a Full Stack Developer proficient in React, TypeScri...",
+      "pass": true,
+      "durationMs": 4505,
+      "error": null
+    },
+    {
+      "run": 4,
+      "input": "Our team is hiring a Mobile Developer specialising in Flutte...",
+      "pass": true,
+      "durationMs": 6043,
+      "error": null
+    },
+    {
+      "run": 5,
+      "input": "We are hiring a Cloud Infrastructure Engineer with deep expe...",
+      "pass": true,
+      "durationMs": 4254,
+      "error": null
+    },
+    {
+      "run": 6,
+      "input": "We are looking for a Senior Backend Engineer to join our pla...",
+      "pass": true,
+      "durationMs": 5143,
+      "error": null
+    },
+    {
+      "run": 7,
+      "input": "Seeking a Data Scientist with expertise in Python, Pandas, S...",
+      "pass": true,
+      "durationMs": 4252,
+      "error": null
+    },
+    {
+      "run": 8,
+      "input": "We need a Full Stack Developer proficient in React, TypeScri...",
+      "pass": true,
+      "durationMs": 4881,
+      "error": null
+    },
+    {
+      "run": 9,
+      "input": "Our team is hiring a Mobile Developer specialising in Flutte...",
+      "pass": true,
+      "durationMs": 4668,
+      "error": null
+    },
+    {
+      "run": 10,
+      "input": "We are hiring a Cloud Infrastructure Engineer with deep expe...",
+      "pass": true,
+      "durationMs": 5677,
+      "error": null
+    },
+    {
+      "run": 11,
+      "input": "We are looking for a Senior Backend Engineer to join our pla...",
+      "pass": true,
+      "durationMs": 5016,
+      "error": null
+    },
+    {
+      "run": 12,
+      "input": "Seeking a Data Scientist with expertise in Python, Pandas, S...",
+      "pass": true,
+      "durationMs": 5835,
+      "error": null
+    },
+    {
+      "run": 13,
+      "input": "We need a Full Stack Developer proficient in React, TypeScri...",
+      "pass": true,
+      "durationMs": 5633,
+      "error": null
+    },
+    {
+      "run": 14,
+      "input": "Our team is hiring a Mobile Developer specialising in Flutte...",
+      "pass": true,
+      "durationMs": 4405,
+      "error": null
+    },
+    {
+      "run": 15,
+      "input": "We are hiring a Cloud Infrastructure Engineer with deep expe...",
+      "pass": true,
+      "durationMs": 4571,
+      "error": null
+    },
+    {
+      "run": 16,
+      "input": "We are looking for a Senior Backend Engineer to join our pla...",
+      "pass": true,
+      "durationMs": 5163,
+      "error": null
+    },
+    {
+      "run": 17,
+      "input": "Seeking a Data Scientist with expertise in Python, Pandas, S...",
+      "pass": true,
+      "durationMs": 5931,
+      "error": null
+    },
+    {
+      "run": 18,
+      "input": "We need a Full Stack Developer proficient in React, TypeScri...",
+      "pass": true,
+      "durationMs": 4012,
+      "error": null
+    },
+    {
+      "run": 19,
+      "input": "Our team is hiring a Mobile Developer specialising in Flutte...",
+      "pass": true,
+      "durationMs": 6318,
+      "error": null
+    },
+    {
+      "run": 20,
+      "input": "We are hiring a Cloud Infrastructure Engineer with deep expe...",
+      "pass": true,
+      "durationMs": 4619,
+      "error": null
+    },
+    {
+      "run": 21,
+      "input": "We are looking for a Senior Backend Engineer to join our pla...",
+      "pass": true,
+      "durationMs": 5166,
+      "error": null
+    },
+    {
+      "run": 22,
+      "input": "Seeking a Data Scientist with expertise in Python, Pandas, S...",
+      "pass": true,
+      "durationMs": 5122,
+      "error": null
+    },
+    {
+      "run": 23,
+      "input": "We need a Full Stack Developer proficient in React, TypeScri...",
+      "pass": true,
+      "durationMs": 5229,
+      "error": null
+    },
+    {
+      "run": 24,
+      "input": "Our team is hiring a Mobile Developer specialising in Flutte...",
+      "pass": true,
+      "durationMs": 4376,
+      "error": null
+    },
+    {
+      "run": 25,
+      "input": "We are hiring a Cloud Infrastructure Engineer with deep expe...",
+      "pass": true,
+      "durationMs": 5400,
+      "error": null
+    },
+    {
+      "run": 26,
+      "input": "We are looking for a Senior Backend Engineer to join our pla...",
+      "pass": true,
+      "durationMs": 5185,
+      "error": null
+    },
+    {
+      "run": 27,
+      "input": "Seeking a Data Scientist with expertise in Python, Pandas, S...",
+      "pass": true,
+      "durationMs": 5053,
+      "error": null
+    },
+    {
+      "run": 28,
+      "input": "We need a Full Stack Developer proficient in React, TypeScri...",
+      "pass": true,
+      "durationMs": 5633,
+      "error": null
+    },
+    {
+      "run": 29,
+      "input": "Our team is hiring a Mobile Developer specialising in Flutte...",
+      "pass": true,
+      "durationMs": 4902,
+      "error": null
+    },
+    {
+      "run": 30,
+      "input": "We are hiring a Cloud Infrastructure Engineer with deep expe...",
+      "pass": true,
+      "durationMs": 5746,
+      "error": null
+    }
+  ],
+  "quiz": [
+    {
+      "run": 1,
+      "input": "Convolutional Neural Networks (CNNs) are a class of deep lea...",
+      "pass": true,
+      "durationMs": 3790,
+      "error": null
+    },
+    {
+      "run": 2,
+      "input": "REST (Representational State Transfer) is an architectural s...",
+      "pass": true,
+      "durationMs": 4503,
+      "error": null
+    },
+    {
+      "run": 3,
+      "input": "SQL joins combine rows from two or more tables based on a re...",
+      "pass": true,
+      "durationMs": 2810,
+      "error": null
+    },
+    {
+      "run": 4,
+      "input": "Docker is a platform for containerising applications. A Dock...",
+      "pass": true,
+      "durationMs": 4666,
+      "error": null
+    },
+    {
+      "run": 5,
+      "input": "Agile software development is an iterative approach that del...",
+      "pass": true,
+      "durationMs": 5119,
+      "error": null
+    },
+    {
+      "run": 6,
+      "input": "Convolutional Neural Networks (CNNs) are a class of deep lea...",
+      "pass": true,
+      "durationMs": 3481,
+      "error": null
+    },
+    {
+      "run": 7,
+      "input": "REST (Representational State Transfer) is an architectural s...",
+      "pass": true,
+      "durationMs": 4161,
+      "error": null
+    },
+    {
+      "run": 8,
+      "input": "SQL joins combine rows from two or more tables based on a re...",
+      "pass": true,
+      "durationMs": 3607,
+      "error": null
+    },
+    {
+      "run": 9,
+      "input": "Docker is a platform for containerising applications. A Dock...",
+      "pass": true,
+      "durationMs": 4723,
+      "error": null
+    },
+    {
+      "run": 10,
+      "input": "Agile software development is an iterative approach that del...",
+      "pass": true,
+      "durationMs": 3790,
+      "error": null
+    },
+    {
+      "run": 11,
+      "input": "Convolutional Neural Networks (CNNs) are a class of deep lea...",
+      "pass": true,
+      "durationMs": 4506,
+      "error": null
+    },
+    {
+      "run": 12,
+      "input": "REST (Representational State Transfer) is an architectural s...",
+      "pass": true,
+      "durationMs": 1076,
+      "error": null
+    },
+    {
+      "run": 13,
+      "input": "SQL joins combine rows from two or more tables based on a re...",
+      "pass": true,
+      "durationMs": 5682,
+      "error": null
+    },
+    {
+      "run": 14,
+      "input": "Docker is a platform for containerising applications. A Dock...",
+      "pass": true,
+      "durationMs": 5017,
+      "error": null
+    },
+    {
+      "run": 15,
+      "input": "Agile software development is an iterative approach that del...",
+      "pass": true,
+      "durationMs": 3788,
+      "error": null
+    },
+    {
+      "run": 16,
+      "input": "Convolutional Neural Networks (CNNs) are a class of deep lea...",
+      "pass": true,
+      "durationMs": 4812,
+      "error": null
+    },
+    {
+      "run": 17,
+      "input": "REST (Representational State Transfer) is an architectural s...",
+      "pass": true,
+      "durationMs": 2459,
+      "error": null
+    },
+    {
+      "run": 18,
+      "input": "SQL joins combine rows from two or more tables based on a re...",
+      "pass": true,
+      "durationMs": 4610,
+      "error": null
+    },
+    {
+      "run": 19,
+      "input": "Docker is a platform for containerising applications. A Dock...",
+      "pass": true,
+      "durationMs": 4397,
+      "error": null
+    },
+    {
+      "run": 20,
+      "input": "Agile software development is an iterative approach that del...",
+      "pass": true,
+      "durationMs": 3485,
+      "error": null
+    },
+    {
+      "run": 21,
+      "input": "Convolutional Neural Networks (CNNs) are a class of deep lea...",
+      "pass": true,
+      "durationMs": 4259,
+      "error": null
+    },
+    {
+      "run": 22,
+      "input": "REST (Representational State Transfer) is an architectural s...",
+      "pass": true,
+      "durationMs": 3419,
+      "error": null
+    },
+    {
+      "run": 23,
+      "input": "SQL joins combine rows from two or more tables based on a re...",
+      "pass": true,
+      "durationMs": 3791,
+      "error": null
+    },
+    {
+      "run": 24,
+      "input": "Docker is a platform for containerising applications. A Dock...",
+      "pass": true,
+      "durationMs": 4897,
+      "error": null
+    },
+    {
+      "run": 25,
+      "input": "Agile software development is an iterative approach that del...",
+      "pass": true,
+      "durationMs": 3912,
+      "error": null
+    },
+    {
+      "run": 26,
+      "input": "Convolutional Neural Networks (CNNs) are a class of deep lea...",
+      "pass": true,
+      "durationMs": 2351,
+      "error": null
+    },
+    {
+      "run": 27,
+      "input": "REST (Representational State Transfer) is an architectural s...",
+      "pass": true,
+      "durationMs": 5240,
+      "error": null
+    },
+    {
+      "run": 28,
+      "input": "SQL joins combine rows from two or more tables based on a re...",
+      "pass": true,
+      "durationMs": 4797,
+      "error": null
+    },
+    {
+      "run": 29,
+      "input": "Docker is a platform for containerising applications. A Dock...",
+      "pass": true,
+      "durationMs": 3655,
+      "error": null
+    },
+    {
+      "run": 30,
+      "input": "Agile software development is an iterative approach that del...",
+      "pass": false,
+      "durationMs": 47,
+      "error": "ZodError: [\n  {\n    \"expected\": \"array\",\n    \"code\": \"invalid_type\",\n    \"path\": [],\n    \"message\": \"Invalid input: expected array, received null\"\n  }\n]"
+    }
+  ]
+}

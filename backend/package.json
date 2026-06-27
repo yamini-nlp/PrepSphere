@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "worker": "node workers/aiWorker.js"
+    "worker": "node workers/aiWorker.js",
+    "eval": "node eval/runEval.js"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +27,7 @@
     "mongoose": "^9.2.2",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
-    "redis": "^5.12.1"
+    "redis": "^5.12.1",
+    "zod": "^4.4.3"
   }
 }

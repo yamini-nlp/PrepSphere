@@ -606,14 +606,15 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        model: 'llama-3.3-70b-versatile',
-                        temperature: 0.5,
-                        max_tokens: 1024,
-                        messages: [
-                            { role: 'system', content: 'You are an ATS expert. Extract 15 essential buzzwords/skills from the job description. Return ONLY a comma-separated list.' },
-                            { role: 'user', content: jobDescription }
-                        ]
-                    })
+                    feature: 'buzzwords',
+                    model: 'llama-3.3-70b-versatile',
+                    temperature: 0.5,
+                    max_tokens: 1024,
+                    messages: [
+                    { role: 'system', content: 'You are an ATS expert. Extract 15 essential buzzwords/skills from the job description. Return ONLY a comma-separated list.' },
+                    { role: 'user', content: jobDescription }
+                    ]
+            })
                 });
 
                 const data = await res.json();

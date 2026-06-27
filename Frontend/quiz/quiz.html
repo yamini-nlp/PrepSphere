@@ -106,13 +106,14 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        model: 'llama-3.3-70b-versatile',
-                        temperature: 0.7,
-                        response_format: { type: 'json_object' },
-                        messages: [
-                            { role: 'system', content: 'Create a 10-question multiple-choice quiz based on the provided text. Return ONLY a JSON object with this exact structure: { "questions": [ { "question": "...", "options": ["", "", "", ""], "answer": 0 } ] } The "answer" should be the index (0-3) of the correct option.' },
-                            { role: 'user', content: content }
-                        ]
+                    feature: 'quiz',
+                    model: 'llama-3.3-70b-versatile',
+                    temperature: 0.7,
+                    response_format: { type: 'json_object' },
+                    messages: [
+                    { role: 'system', content: 'Create a 10-question multiple-choice quiz based on the provided text. Return ONLY a JSON object with this exact structure: { "questions": [ { "question": "...", "options": ["", "", "", ""], "answer": 0 } ] } The "answer" should be the index (0-3) of the correct option.' },
+                    { role: 'user', content: content }
+                    ]
                     })
                 });
                 const data = await res.json();

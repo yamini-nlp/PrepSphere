@@ -2,6 +2,7 @@ require("dotenv").config({ path: require("path").resolve(__dirname, "../.env") }
 
 const { Worker } = require("bullmq");
 const mongoose   = require("mongoose");
+const { ZodError } = require("zod");
 const { createRedisConnection } = require("../queues/redisConnection");
 const {
     extractBuzzwords,
@@ -9,6 +10,12 @@ const {
     generateMockInterview,
     generateRoadmap,
 } = require("../aiService");
+const {
+    RoadmapSchema,
+    QuizSchema,
+    InterviewSchema,
+    BuzzwordsSchema,
+} = require("../schemas");
 const Job = require("../models/Job");
 
 mongoose
@@ -40,13 +47,17 @@ async function processJob(job) {
 
     let result;
 
-    // switch checks which queue this job came from, then calls the right AI function
     switch (job.queueName) {
         case "prepsphere-ai-roadmap": {
             const { role } = job.data;
             result = await generateRoadmap(role);
-            if (!result || result.error) {
-                throw new Error(result?.error || "Roadmap generation returned empty result");
+            try {
+                RoadmapSchema.parse(result);
+            } catch (err) {
+                if (err instanceof ZodError) {
+                    throw new Error(`Roadmap validation failed: ${err.message}`);
+                }
+                throw err;
             }
             break;
         }
@@ -54,8 +65,13 @@ async function processJob(job) {
         case "prepsphere-ai-buzzwords": {
             const { jobDescription } = job.data;
             result = await extractBuzzwords(jobDescription);
-            if (!result || result.length === 0 || result.includes("AI is busy. Try again in 30s.")) {
-                throw new Error("Buzzword extraction failed or AI was busy");
+            try {
+                BuzzwordsSchema.parse(result);
+            } catch (err) {
+                if (err instanceof ZodError) {
+                    throw new Error(`Buzzword validation failed: ${err.message}`);
+                }
+                throw err;
             }
             break;
         }
@@ -63,8 +79,13 @@ async function processJob(job) {
         case "prepsphere-ai-interview": {
             const { jobDescription } = job.data;
             result = await generateMockInterview(jobDescription);
-            if (!result || !result.topics || !result.interviews) {
-                throw new Error("Mock interview generation returned invalid structure");
+            try {
+                InterviewSchema.parse(result);
+            } catch (err) {
+                if (err instanceof ZodError) {
+                    throw new Error(`Interview validation failed: ${err.message}`);
+                }
+                throw err;
             }
             break;
         }
@@ -72,8 +93,13 @@ async function processJob(job) {
         case "prepsphere-ai-quiz": {
             const { content } = job.data;
             result = await generateQuiz(content);
-            if (!result || !Array.isArray(result) || result.length === 0) {
-                throw new Error("Quiz generation returned no questions");
+            try {
+                QuizSchema.parse(result);
+            } catch (err) {
+                if (err instanceof ZodError) {
+                    throw new Error(`Quiz validation failed: ${err.message}`);
+                }
+                throw err;
             }
             break;
         }

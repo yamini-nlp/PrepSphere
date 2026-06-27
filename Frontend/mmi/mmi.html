@@ -92,6 +92,7 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
+                        feature: 'interview',
                         model: 'llama-3.3-70b-versatile',
                         temperature: 0.6,
                         response_format: { type: 'json_object' },
