@@ -1,122 +1,122 @@
-# 🎯 PrepSphere — AI-Powered Interview Preparation Platform
+# 🎯 PrepSphere
 
-> A unified platform that guides candidates through structured placement preparation — learning roadmaps, interview practice, and application execution — using LLM-powered generation.
+**Full-stack AI placement preparation platform** — role-aligned learning roadmaps, AI interview prep, and outreach guidance — built as a controlled comparison of two LLM-integration reliability strategies: a direct synchronous proxy versus a schema-validated async job queue.
 
-**Live Demo:** https://prepsphere000146.vercel.app &nbsp;|&nbsp; **GitHub:** https://github.com/yamini-nlp/PrepSphere
+**Live Demo:** https://prepsphere000146.vercel.app
 
-![Stack](https://img.shields.io/badge/Stack-Node.js%20%7C%20Express%20%7C%20BullMQ%20%7C%20MongoDB-blue?style=flat-square)
+**Repository:** https://github.com/yamini-nlp/PrepSphere
+
+![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=flat-square&logo=node.js&logoColor=white)
 ![LLM](https://img.shields.io/badge/LLM-Llama%203.3%2070B%20%7C%20Groq-orange?style=flat-square)
-![Queue](https://img.shields.io/badge/Queue-BullMQ%20%7C%20Upstash%20Redis-red?style=flat-square)
-![Status](https://img.shields.io/badge/Status-Live-brightgreen?style=flat-square)
+![Queue](https://img.shields.io/badge/Queue-BullMQ%20%7C%20Redis-DC382D?style=flat-square&logo=redis&logoColor=white)
+![Database](https://img.shields.io/badge/Database-MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)
+![Validation](https://img.shields.io/badge/Validation-Zod-3068B7?style=flat-square)
+![Frontend](https://img.shields.io/badge/Frontend-Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
+![Backend](https://img.shields.io/badge/Backend-Render-46E3B7?style=flat-square&logo=render&logoColor=black)
+![License](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey?style=flat-square)
 
 ---
 
-## Overview
+## 💡 Motivation
 
-PrepSphere addresses the fragmentation in placement preparation by unifying three critical stages — learning, practice, and application — into a single AI-driven workflow.
+LLM APIs fail in ways that are easy to miss in development and expensive to discover in production: malformed output that passes JSON parsing, silent fallbacks on rate limits, and schema drift between model versions. Most application code collapses all of these into a single undifferentiated error. This project was built specifically to study that problem — implementing two integration strategies for the same generation tasks, measuring schema conformance across 120 evaluation runs, and identifying a latent observability gap where a real failure was entirely invisible to the caller. The platform — placement preparation — is the deployment context; the reliability comparison is the research question.
 
-The system explores two different reliability strategies for the same underlying problem — *an LLM API call that can fail, return malformed output, or run long* — implemented as two parallel paths:
+---
 
-1. **A direct Groq proxy** (`Frontend/api/groq.js`) — synchronous, simple, used by the live AI feature pages today.
-2. **An async job-queue backend** (`backend/`, Express + BullMQ + MongoDB, deployed on Render) — built to handle the same problem with retries, output sanity checks, and non-blocking polling. Currently only authentication is wired through it from the frontend; the generation queues are implemented and independently functional but not yet the production path.
+## 🧭 Overview
 
-Building both was deliberate: it surfaces the actual tradeoff between "ship something that works" and "build the version that degrades gracefully under failure" — see [LLM Integration & Reliability](#-llm-integration--reliability) below for what that second path actually does.
+PrepSphere is a placement-preparation platform covering three stages of job-seeking — learning, interview practice, and application outreach — built as a Vanilla JS frontend on Vercel with a separate Node.js/Express backend on Render.
 
-The platform runs on free-tier infrastructure (Render + Vercel + Upstash + MongoDB Atlas + Groq).
+The project implements **two parallel integration strategies** for the same underlying problem (an LLM API call that can fail, return malformed output, or run long), rather than a single pipeline:
+
+1. A **direct, synchronous proxy** to the Groq API (`Frontend/api/groq.js`), which is what every live AI feature currently calls.
+2. An **asynchronous job-queue backend** (Express + BullMQ + MongoDB on Render), built with retry logic and output validation, but currently wired into the live frontend for authentication only — the generation queues are implemented and independently verified working, not yet the path users hit.
+
+This split is documented rather than hidden: the [Architecture](#-architecture-two-reliability-strategies) and [Limitations](#-limitations) sections describe exactly which path serves which feature today.
 
 ---
 
 ## 🎯 Problem Statement
 
-Placement preparation is fragmented across learning platforms, resume editors, interview practice sites, and job portals — each operating in isolation. This forces repeated context-switching, creates coverage gaps, and produces inconsistent results. Mock interview access is often gated behind expensive coaching.
-
-PrepSphere integrates the critical stages of placement readiness into one workflow at zero cost to the user.
+Placement preparation is typically fragmented across separate tools — a learning-roadmap site, a resume editor, an interview question bank, an outreach template generator — each requiring its own context and login. PrepSphere consolidates the learning, practice, and outreach stages into one application, using LLM generation tailored to a specific target role or job description rather than static, generic content.
 
 ---
 
-## 💡 Feature Areas
+## 🧩 What It Does
+
+PrepSphere covers three stages of job-seeking in one application:
 
 **Learning & Orientation**
-
-The Roadmap module submits a target job role to Llama 3.3 70B (via the direct `/api/groq` proxy) and returns learning modules, resources, and project ideas. Resume and cover letter generation work the same way — direct client-side calls to `/api/groq`.
+The Roadmap module generates a structured learning path — ordered steps, topics, curated resources, and project ideas — for any target role. Users choose between tech, non-tech, or conventional tracks before generation. Resume and cover letter generation follow the same pattern: role or JD in, structured content out.
 
 **Interview Practice**
+MockIt is a hub that routes users to round-specific preparation pages for Group Discussion, Aptitude, Technical, HR, and JAM rounds — each with curated content, strategies, and examples. Two AI-powered modules sit alongside it: MockMyInterview (`/mmi/`) takes a job description and generates 5–7 core preparation topics plus 10 interview questions with expert answers; the AI MCQ Generator (`/quiz/`) takes any text and produces a 10-question multiple-choice quiz with indexed answers. Both call `llama-3.3-70b-versatile` via the Vercel serverless proxy. PrepMaster (`/prepmaster/`) provides targeted preparation notes for a curated set of companies — this is static reference content, not a dynamically generated dataset.
 
-The MockIt module provides simulated interview round pages (Group Discussion, Aptitude, Technical, HR, JAM, MCQ, Quiz). A `prepmaster` company-prep page lists prep notes and trends for a curated set of around 20 companies (e.g. TCS, Wipro, Infosys, Accenture, Google, Amazon, Microsoft, Meta) — this is a fixed reference list, not a large structured database with automatic difficulty calibration.
-
-**Application Execution**
-
-The HireHub and cover-letter modules provide outreach template tooling (cold emails, LinkedIn DMs, follow-ups, rejection responses) and resume tooling, calling the same direct Groq proxy pattern.
-
-**Authentication**
-
-`login.html` and `register.html` call the real deployed Render backend (`https://prepsphere-o7wh.onrender.com`) via `/api/auth/login` and `/api/auth/register`, using JWT-based stateless auth with `passport`/`passport-google-oauth20` available as dependencies.
+**Outreach Guidance**
+HireHub (`/hirehub/`) covers the application execution stage. It explains cold emailing, LinkedIn direct messaging, and post-rejection follow-up strategies, with sample templates and pro tips for each. This is curated static guidance, not AI generation.
 
 ---
 
-## 🧠 LLM Integration & Reliability
+## 🏗️ Architecture: Two Reliability Strategies
 
-Every generation feature (roadmap, quiz, mock interview, buzzword extraction) calls Llama 3.3 70B via Groq with a role-framed system prompt that specifies an exact output contract — for example, the roadmap prompt requires a JSON object with a fixed `roadmapSteps[]` / `projectIdeas[]` shape, and the quiz prompt requires a fixed `questions[]` array with an `answer` index field.
+The core design choice is implementing both strategies — not picking one — so their behaviour under the same failure conditions can be directly compared.
 
-Two different levels of rigor are applied to this contract across the two paths:
+### Path A — Direct Proxy (live path for all AI generation today)
 
-- **Path A (live):** uses Groq's structural JSON mode (`response_format: { type: "json_object" }`), which guarantees syntactically valid JSON but does not verify that the returned fields match the requested shape. Output is parsed and returned as-is; a malformed or incomplete structure is not caught before reaching the UI.
-- **Path B (queue, not yet wired to the UI):** adds a lightweight output sanity check on top of the same JSON mode — each queue handler checks the result against minimal structural expectations before marking a job complete (e.g. the interview handler checks that both `topics` and `interviews` are present; the quiz handler checks that `result` is a non-empty array). A failed check throws, which triggers BullMQ's per-queue retry policy (3–5 attempts with exponential backoff) rather than serving a broken result.
+```
+Browser → fetch('/api/groq') → Vercel serverless function → Groq API → JSON returned synchronously
+```
 
-This is intentionally described as a **sanity check, not full schema validation** — it confirms presence and rough shape, not field types or nested structure. A natural extension (noted in Future Work) is validating against a strict schema (e.g. Zod or JSON Schema) before acceptance.
+No persistence. No retry. No schema validation. If the model returns syntactically valid JSON with a mismatched shape, it reaches the frontend unchanged.
 
-Every LLM-calling function also has an explicit fallback path (a placeholder message or `null`) rather than an unhandled exception, so a Groq outage or malformed response degrades the feature rather than crashing the request.
+### Path B — Async Job Queue (implemented; auth is the only live route today)
+
+```
+Browser → POST /api/{feature} → Express (Render) → BullMQ queue → aiWorker.js → Zod validation → MongoDB Job document
+                                                                         ↑
+                                                               retry/backoff on validation failure
+```
+
+A `POST` returns `202 Accepted` with a `jobId`. `workers/aiWorker.js` consumes all four queues, validates output against a Zod schema before marking a job complete, and triggers BullMQ's retry policy on failure rather than persisting a malformed result. `GET /api/jobs/:jobId` exposes job status for polling. The queue infrastructure has been independently exercised and works correctly. Only `/api/auth/*` is live from the frontend today.
+
+**Why both exist:** Path A is simpler and lower-latency; Path B adds retry, persistence, and runtime schema enforcement. The comparison is the point. Migrating live generation from Path A to Path B is the first item in [Future Work](#-future-work).
 
 ---
 
-## 🏗️ System Architecture
+## 🧠 LLM Output Validation
 
-### Path A — Live AI feature pages (Roadmap, Resume, Cover Letter, MMI, Quiz)
+The four generation functions in `backend/aiService.js` — `generateRoadmap`, `generateQuiz`, `generateMockInterview`, `extractBuzzwords` — call Groq with `response_format: { type: "json_object" }` where applicable. This guarantees syntactically valid JSON but not field-level correctness.
 
-```
-Frontend Page (browser)
-        │
-        ▼
-  fetch('/api/groq')  ──►  Frontend/api/groq.js (Vercel serverless function)
-        │
-        ▼
-  Groq Cloud API  ──►  llama-3.3-70b-versatile
-        │
-        ▼
-  Response returned synchronously, no persistence, no queue
-```
+Path B validates every response against a Zod schema before persistence. Four schemas are defined in `backend/schemas.js`:
 
-This path has **no rate limiting, no retry/backoff, and no job queue** — it is a direct, synchronous proxy to Groq.
-
-### Path B — Backend job-queue system (built, partially wired)
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                   Backend API Layer                         │
-│              Node.js + Express  (Render)                    │
-│  POST /api/roadmap              → roadmap queue             │
-│  POST /api/generate-buzzwords   → buzzwords queue           │
-│  POST /api/mock-interview       → interview queue           │
-│  POST /api/generate-quiz        → quiz queue                │
-│  GET  /api/jobs/:jobId          → status polling            │
-│  POST /api/auth/register|login  → JWT auth   ← LIVE, IN USE │
-│  Middleware: Redis rate limiter (per-route limits) · CORS   │
-└───────┬───────────────────┬──────────────────┬──────────────┘
-        │                   │                  │
-┌───────▼──────┐   ┌────────▼───────┐  ┌──────▼──────┐
-│  BullMQ +    │   │   Groq API     │  │  MongoDB    │
-│  Upstash     │   │  llama-3.3-    │  │   Atlas     │
-│  Redis       │   │  70b-versatile │  │             │
-│ 4 named      │   │                │  │ Job TTL     │
-│ queues:      │   │                │  │ index:      │
-│ roadmap,     │   │                │  │ 1hr expiry  │
-│ buzzwords,   │   │                │  │ on Job docs │
-│ interview,   │   │                │  │             │
-│ quiz         │   │                │  │             │
-└──────────────┘   └────────────────┘  └─────────────┘
+```js
+const QuizSchema = z.array(
+  z.object({
+    question: z.string(),
+    options: z.array(z.string()).length(4),
+    answer: z.number().int().min(0).max(3),
+  })
+);
 ```
 
-> **Async orchestration (Path B only):** A `POST` to any of the four queue-backed endpoints returns `202 Accepted` with a `jobId` immediately, persists a `Job` document in MongoDB, and enqueues work via BullMQ. A separate worker process (`workers/aiWorker.js`) consumes all four queues with per-queue concurrency and retry settings. `GET /api/jobs/:jobId` returns job status. **This pipeline is implemented and functional, but no frontend page currently calls it for generation** — only the queue infrastructure itself has been verified working.
+A failed validation throws, which triggers BullMQ's retry policy rather than persisting a malformed result. Path A has no schema validation — the parsed response is returned to the page as-is.
+
+---
+
+## 📊 Evaluation & Findings
+
+`backend/eval/runEval.js` runs each of the four generation functions against 5 fixed sample inputs, 6 times each — 30 runs per feature, 120 total — and validates every result against its Zod schema. Results are logged to `backend/eval/results.json`.
+
+| Feature | Runs | Passed | Pass Rate |
+|---|---|---|---|
+| 🗺️ Roadmap | 30 | 30 | 100.0% |
+| 🏷️ Buzzwords | 30 | 30 | 100.0% |
+| 🎤 Interview | 30 | 30 | 100.0% |
+| 📝 Quiz | 30 | 29 | 96.7% |
+
+**🔍 Finding:** The single quiz failure raised `ZodError: expected array, received null` — meaning `generateQuiz()` returned its generic fallback (`null`) rather than propagating the underlying error. This exposed a structural problem: all four functions in `aiService.js` wrap their Groq calls in a `try/catch` that logs to console and returns a typed fallback rather than re-throwing. As a result, a transient API error, a rate limit, and a schema mismatch are indistinguishable to the caller — they all surface as the same fallback. This was not assumed; it was discovered through the evaluation harness. It is documented as a known observability gap and is the first item in [Future Work](#-future-work).
+
+**Scope:** schema conformance only. Semantic quality, relevance, and factual correctness of generated content are not measured.
 
 ---
 
@@ -124,33 +124,12 @@ This path has **no rate limiting, no retry/backoff, and no job queue** — it is
 
 | Component | Choice | Rationale |
 |---|---|---|
-| LLM | Llama 3.3 70B (`llama-3.3-70b-versatile`) via Groq | Fast inference, low cost relative to closed-source frontier models |
-| Queue (Path B) | BullMQ + Redis (Upstash) | Prevents timeout failures; retry/backoff without additional infrastructure |
-| Database | MongoDB Atlas | Flexible schema suits heterogeneous output shapes; also backs the `Job` collection for Path B |
-| Auth | JWT (stateless), Passport (Google OAuth available as a dependency) | Minimal overhead; no session store required |
-| Frontend | Vanilla JS | Zero build pipeline; instant Vercel deploy |
-
----
-
-## ⚠️ Limitations
-
-- **No strict schema validation:** output checks (Path B) confirm presence and rough shape, not full type/structural correctness — a model that returns a syntactically valid but semantically wrong JSON shape (e.g. a string where an array is expected in a nested field) would not currently be caught
-- **Two reliability paths, one in production:** the async, retry-backed queue system (Path B) is implemented and independently functional, but the live frontend's generation features currently call the simpler direct proxy (Path A), which has no retry or rate limiting — see System Architecture
-- **Company prep coverage is limited:** the `prepmaster` page lists roughly 20 companies with static notes, not an automatically calibrated database
-- **No resume PDF parsing:** Resume input is text-only (paste-based)
-- **No cross-session progress tracking:** No mechanism to track what a user has completed or bookmarked across sessions
-- **English only:** The platform currently supports English only
-
----
-
-## 🔭 Future Work
-
-- **Strict schema validation** for all LLM outputs (e.g. Zod/JSON Schema) ahead of the current presence-only sanity checks, with malformed responses routed to automatic retry with prompt repair rather than silent fallback
-- **Migrate live generation features onto the queue-based path (Path B)** so retry, rate limiting, and persistence apply to what users actually experience, not just the auth flow
-- **Quantitative evaluation of generation quality** — currently there is no held-out evaluation of roadmap relevance, quiz answer correctness, or interview question quality beyond manual spot-checking
-- **Expand company-specific preparation coverage** beyond the current static list, ideally backed by a maintained or periodically refreshed dataset
-- **PDF resume parsing** with structured section extraction (skills, experience, education)
-- **Cross-session progress tracking** so users can resume and track preparation coverage over time
+| 🤖 LLM | `llama-3.3-70b-versatile` via Groq | Low-latency inference compatible with synchronous Path A requests |
+| 📬 Queue | BullMQ + Upstash Redis | Retry/backoff without managing dedicated queue infrastructure |
+| 🗄️ Database | MongoDB Atlas + Mongoose | Schema flexibility across heterogeneous generation outputs; backs Path B `Job` collection with 1-hour TTL |
+| ✅ Validation | Zod (Path B only) | Runtime enforcement of expected output shape before persistence |
+| 🔐 Auth | JWT, stateless | No server-side session store required |
+| 🌐 Frontend | Vanilla JS, no build step | Zero pipeline; direct static deployment to Vercel |
 
 ---
 
@@ -158,65 +137,14 @@ This path has **no rate limiting, no retry/backoff, and no job queue** — it is
 
 | Layer | Technology |
 |---|---|
-| Frontend | Vanilla JS, HTML5, CSS3 |
-| Frontend AI proxy | Vercel serverless function (`api/groq.js`) |
-| Backend (Path B) | Node.js, Express, Passport |
-| LLM | Llama 3.3 70B (`llama-3.3-70b-versatile`) via Groq API |
-| Queue (Path B) | BullMQ + Upstash Redis |
-| Database | MongoDB Atlas (Mongoose) |
-| Auth | JWT (stateless) — live via Path B |
-| Frontend Hosting | Vercel |
-| Backend Hosting | Render |
-
----
-
-## 🚀 Local Setup
-
-**Prerequisites:** Node.js 18+ · MongoDB Atlas account · Groq API key · Upstash Redis instance
-
-**1. Clone**
-```bash
-git clone https://github.com/yamini-nlp/PrepSphere.git
-cd PrepSphere
-```
-
-**2. Backend setup (Path B — auth + job-queue system)**
-```bash
-cd backend
-npm install
-```
-
-Create `backend/.env`:
-```
-MONGO_URI=your_mongodb_connection_string
-GROQ_API_KEY=your_groq_api_key
-JWT_SECRET=your_jwt_secret
-REDIS_URL=rediss://default:your_password@your-host.upstash.io:6379
-ADMIN_PASSWORD=your_bull_board_password
-```
-
-Start the API server and queue worker as separate processes:
-```bash
-# Terminal 1 — API server
-node server.js
-
-# Terminal 2 — Queue worker
-node workers/aiWorker.js
-```
-
-Server: `http://localhost:5000` &nbsp;|&nbsp; Bull Board: `http://localhost:5000/admin/queues`
-
-**3. Frontend setup (Path A — direct Groq proxy, used by all live AI pages)**
-```bash
-cd Frontend
-python -m http.server 5000
-# or: right-click index.html in VS Code → Open with Live Server
-```
-Visit `http://localhost:5000`
-
-The `api/groq.js` serverless function requires `GROQ_API_KEY` to be set in your Vercel project's environment variables when deployed.
-
-> ⚠️ Use a `rediss://` URL (TLS) for Upstash Redis — plain `redis://` connections will be rejected.
+| Frontend | HTML5, CSS3, Vanilla JavaScript |
+| AI proxy (Path A) | Vercel serverless function (`api/groq.js`) |
+| Backend (Path B) | Node.js, Express — deployed on Render |
+| LLM | Groq API, `llama-3.3-70b-versatile` |
+| Schema validation | Zod |
+| Queue | BullMQ, Upstash Redis |
+| Database | MongoDB Atlas, Mongoose |
+| Auth | JWT (jsonwebtoken) |
 
 ---
 
@@ -225,46 +153,123 @@ The `api/groq.js` serverless function requires `GROQ_API_KEY` to be set in your 
 ```
 PrepSphere/
 ├── backend/
-│   ├── server.js                   # Express API server (Path B)
-│   ├── passport.js                 # Auth strategy config
+│   ├── server.js               # Express app: route mounting, CORS, error handling
+│   ├── aiService.js            # 4 generation functions: roadmap, quiz, interview, buzzwords
+│   ├── schemas.js              # Zod schemas: RoadmapSchema, QuizSchema, InterviewSchema, BuzzwordsSchema
 │   ├── workers/
-│   │   └── aiWorker.js             # BullMQ worker — consumes all four queues
+│   │   └── aiWorker.js         # BullMQ worker — consumes all four queues
 │   ├── queues/
-│   │   ├── index.js                # BullMQ queue definitions
+│   │   ├── index.js            # Queue definitions
 │   │   └── redisConnection.js
 │   ├── routes/
-│   │   ├── auth.js                 # LIVE — used by login.html / register.html
-│   │   └── jobs.js                 # GET /api/jobs/:jobId status polling
+│   │   ├── auth.js             # POST /api/auth/register, /login
+│   │   └── jobs.js             # GET /api/jobs/:jobId
 │   ├── middleware/
 │   │   ├── authMiddleware.js
-│   │   └── rateLimiter.js          # Redis-backed, per-route limits
+│   │   └── rateLimiter.js      # Redis-backed, per-route limits
 │   ├── models/
 │   │   ├── User.js
-│   │   └── Job.js                  # TTL index: 1hr expiry
-│   └── aiService.js                # Groq calls for Path B queue jobs
+│   │   └── Job.js              # TTL index, 1-hour expiry
+│   └── eval/
+│       ├── runEval.js          # 120-run schema-conformance harness
+│       └── results.json        # Latest run output
 ├── Frontend/
-│   ├── index.html
-│   ├── login.html                  # Calls Render backend (Path B auth)
-│   ├── register.html               # Calls Render backend (Path B auth)
-│   ├── js/config.js                # API_BASE_URL for the Render backend
-│   ├── api/groq.js                 # Direct Groq proxy (Path A) — used by AI feature pages
-│   ├── css/style.css
-│   ├── shared/                     # mobile.css, styles.css
-│   ├── images/                     # UI assets
-│   └── [feature pages]/            # Jam, MockIt, Phase1–3, aptitude,
-│                                    # coverletter, dashboard, exp, gd,
-│                                    # hirehub, hr, intervyu, mcqs, mmi,
-│                                    # prepmaster, quiz, resume, roadmap,
-│                                    # technical, tq — each its own
-│                                    # folder + .html page
+│   ├── api/
+│   │   ├── groq.js             # Direct Groq proxy (Path A)
+│   │   └── schemas.js          # Zod schemas (reference copy)
+│   ├── js/config.js            # API_BASE_URL (env-aware)
+│   ├── roadmap/                # tech.html, nontech.html, conventional.html, pathfinder.html
+│   ├── mmi/                    # AI: job-description → topics + 10 Q&A
+│   ├── quiz/                   # AI: text → 10-question MCQ
+│   ├── MockIt/                 # Hub → round-specific prep pages
+│   ├── gd/ hr/ technical/ aptitude/ Jam/   # Static round prep content
+│   ├── hirehub/                # Static outreach guidance: coldmail, dm, afterrej
+│   ├── prepmaster/             # Static company prep notes
+│   ├── resume/ coverletter/    # AI generation pages
+│   ├── dashboard/
+│   ├── login.html register.html
+│   └── index.html
 ├── LICENSE
 └── README.md
 ```
 
 ---
 
+## 🚀 Local Setup
+
+**Prerequisites:** Node.js 18+, MongoDB Atlas URI, Groq API key, Upstash Redis instance.
+
+```bash
+git clone https://github.com/yamini-nlp/PrepSphere.git
+cd PrepSphere/backend && npm install
+```
+
+`backend/.env`:
+
+```
+MONGO_URI=your_mongodb_connection_string
+GROQ_API_KEY=your_groq_api_key
+JWT_SECRET=your_jwt_secret
+REDIS_URL=rediss://default:your_password@your-host.upstash.io:6379
+ADMIN_PASSWORD=your_bull_board_password
+```
+
+> ⚠️ Use `rediss://` (TLS), not `redis://` — Upstash rejects plain connections.
+
+```bash
+# Terminal 1 — API server
+node server.js
+
+# Terminal 2 — Queue worker
+node workers/aiWorker.js
+```
+
+API: `http://localhost:5000` · Bull Board: `http://localhost:5000/admin/queues`
+
+```bash
+# Frontend
+cd ../Frontend && python -m http.server 5000
+
+# Run evaluation harness
+cd backend && node eval/runEval.js
+# Writes eval/results.json and prints pass-rate summary
+```
+
+---
+
+## 🔒 Security
+
+- `.env` excluded from version control via `backend/.gitignore`.
+- CORS restricted to an explicit allow-list (`localhost`, `*.vercel.app`, `*.github.io`) — no wildcard.
+- Groq API key never reaches the browser: Path A's key lives in Vercel's serverless environment; Path B's lives in Render's — neither is shipped in frontend JavaScript.
+
+---
+
+## ⚠️ Limitations
+
+- **Path B not yet serving live generation.** The retry-backed, schema-validated queue system is implemented and verified; every live AI feature still calls the unvalidated Path A proxy.
+- **Error-swallowing in `aiService.js`.** All four generation functions return a typed fallback on failure rather than re-throwing. Provider errors, rate limits, and schema mismatches are indistinguishable to the caller. Identified through the evaluation harness.
+- **Schema conformance only.** The evaluation harness does not measure semantic quality, relevance, or factual correctness of generated content.
+- **HireHub and round prep pages are static.** Cold email, DM, after-rejection templates and the GD/HR/Technical/Aptitude/JAM pages are curated static content — not AI-generated.
+- **PrepMaster company list is static.** Reference content for a curated set of companies; not dynamically maintained.
+- **Plain-text input only.** No PDF parsing or document upload for resume or job description fields.
+- **No cross-session state.** No mechanism to track or resume preparation progress across sessions.
+- **English only.**
+
+---
+
+## 🔭 Future Work
+
+- Re-throw structured error objects from `aiService.js` so evaluation runs can distinguish provider errors, rate limits, and schema mismatches.
+- Migrate live AI generation from Path A to Path B, applying retry, rate limiting, and persistence to what users actually experience.
+- Extend evaluation beyond schema conformance to semantic quality assessment.
+- Add PDF resume parsing with structured extraction.
+- Add cross-session progress tracking.
+
+---
+
 <div align="center">
 
-*Built by Yamini G &nbsp;·&nbsp; [GitHub](https://github.com/yamini-nlp/PrepSphere) &nbsp;·&nbsp; [Live Demo](https://prepsphere000146.vercel.app)*
+Built by Yamini G
 
 </div>
